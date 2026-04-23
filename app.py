@@ -65,8 +65,13 @@ features = [
 X = df[features]
 y = df['Energy Consumption (kWh)']
 
-model = XGBRegressor()
-model.fit(X, y)
+@st.cache_resource
+def train_model(X, y):
+    model = XGBRegressor()
+    model.fit(X, y)
+    return model
+
+model = train_model(X, y)
 
 # =========================
 # TOP METRICS (🔥 IMPRESSIVE)
